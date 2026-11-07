@@ -5,8 +5,8 @@ else
 	EXT=
 	DBG=gdb
 endif
-
 COLLECTIONS="-collection:lib=./lib"
+NAME="renderer"
 
 ODIN_ROOT=$(odin root)
 ODIN_JS="$ODIN_ROOT/core/sys/wasm/js/odin.js"
@@ -28,18 +28,18 @@ all:
 	$(MAKE) c r
 release: 
 	$(SPV_TARGETS)
-	odin build ./ -out:./build/sigil$(EXT) $(COLLECTIONS) -o:speed 
+	odin build ./ -out:./build/$(NAME)$(EXT) $(COLLECTIONS) -o:speed 
 build c:
-	odin build ./ -out:./build/sigil$(EXT) $(COLLECTIONS) -debug
+	odin build ./ -out:./build/$(NAME)$(EXT) $(COLLECTIONS) -debug
 debug d:
 	$(DBG) ./build/sigil$(EXT)
 web w:
-	odin build ./ -target:js_wasm32 -out:./build/web/sigil$(EXT) $(COLLECTIONS) -o:size \
+	odin build ./ -target:js_wasm32 -out:./build/web/$(NAME)$(EXT) $(COLLECTIONS) -o:size \
 		-extra-linker-flags:"--export-table --import-memory --initial-memory=131072000 --max-memory=4294967296"
 	cp $ODIN_JS web/odin.js
 	cp $WGPU_JS web/wgpu.js
 run r:
-	./build/sigil$(EXT)
+	./build/$(NAME)$(EXT)
 clean cln:
-	rm -f ./build/sigil$(EXT)
+	rm -f ./build/$(NAME)$(EXT)
 

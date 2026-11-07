@@ -117,7 +117,7 @@ draw_ui :: proc(world: ^sigil.world_t, cmd: vk.CommandBuffer, img_view: vk.Image
     {
         imgui.SetWindowPos(imgui.Vec2 { 0, f32(draw_extent.height - 48) })
         imgui.TextUnformatted(fmt.caprintf("GPU: %s", cstring(&device.properties.deviceName[0]), allocator = context.temp_allocator))
-        imgui.TextUnformatted(fmt.caprintf("sigil %v.%v.%v", sigil.MAJOR_V, sigil.MINOR_V, sigil.PATCH_V, allocator = context.temp_allocator))
+        imgui.TextUnformatted(fmt.caprintf("sigil-ism %v.%v.%v", sigil.MAJOR_V, sigil.MINOR_V, sigil.PATCH_V, allocator = context.temp_allocator))
     }
     imgui.End()
     imgui.Render()

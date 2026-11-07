@@ -1,6 +1,7 @@
 package main
 
-import "src"
+import ism "src"
+import "lib:sigil"
 
 main :: proc() { /* سيجيل */
     world := sigil.init_world({

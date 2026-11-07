@@ -8,6 +8,7 @@ import "lib:slang"
 import "core:slice"
 import "core:fmt"
 import "core:os"
+import "core:time"
 
 /* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ */
 
@@ -41,7 +42,7 @@ pbr_uniform := pbr_uniform_t {
 pbr_entity: sigil.entity_t
 pbr: material_t
 pbr_push_const: pbr_push_constant_t
-pbr_current_last_write_time: os.File_Time
+pbr_current_last_write_time: time.Time
 
 /* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ */
 
@@ -134,11 +135,11 @@ pbr_declare :: proc(world: ^sigil.world_t, global_session: ^slang.IGlobalSession
     pbr_push_const.emissive        = pbr_emissive_img.index
     pbr_push_const.ao              = pbr_ao_img.index
 
-	pbr_current_last_write_time, _ := os.last_write_time_by_name("sigil/ism/shaders/pbr.slang")
+	pbr_current_last_write_time, _ := os.last_write_time_by_name("shaders/pbr.slang")
 }
 
 @(disabled=!ODIN_DEBUG) __rebuild_pbr_pipeline :: proc(gs: ^slang.IGlobalSession) {
-	last_write_time, file_err := os.last_write_time_by_name("sigil/ism/shaders/pbr.slang")
+	last_write_time, file_err := os.last_write_time_by_name("shaders/pbr.slang")
 	if file_err == nil && pbr_current_last_write_time != last_write_time {
 	    pbr_current_last_write_time = last_write_time
         build_pbr_pipeline(gs)
@@ -173,7 +174,7 @@ build_pbr_pipeline :: proc(global_session: ^slang.IGlobalSession) {
         )
 	    defer session->release()
 
-	    module := session->loadModule("sigil/ism/shaders/pbr.slang", &diagnostics)
+	    module := session->loadModule("shaders/pbr.slang", &diagnostics)
         if module == nil {
             fmt.println("Shader compile error!")
             if diagnostics != nil {
@@ -186,7 +187,7 @@ build_pbr_pipeline :: proc(global_session: ^slang.IGlobalSession) {
             return
         }
         __ensure(module, "failed to load module")
-        defer module->release()
+        //defer module->release() // segfaults now ??
 
 	    vertex_entry: ^slang.IEntryPoint
         __ensure(
@@ -241,12 +242,12 @@ build_pbr_pipeline :: proc(global_session: ^slang.IGlobalSession) {
 	    code_size := target_code->getBufferSize()
 	    source_code := slice.bytes_from_ptr(target_code->getBufferPointer(), auto_cast code_size)
     } else {
-        source_code :: #load("shaders/pbr.spv") // not working, fix later (probably in makefile)
+        source_code :: #load("../shaders/pbr.spv") // not working, fix later (probably in makefile)
     }
     info := vk.ShaderModuleCreateInfo {
         sType    = .SHADER_MODULE_CREATE_INFO,
         codeSize = len(source_code),
-        pCode    = (^u32)(raw_data(slice.reinterpret([]u32, source_code))),
+        pCode    = (^u32)(raw_data(source_code)),
     }
     vk_module: vk.ShaderModule
     __ensure(

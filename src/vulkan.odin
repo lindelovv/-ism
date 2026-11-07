@@ -402,8 +402,8 @@ init_vulkan :: proc(world: ^sigil.world_t) {
         pNext                   = &features_vk_1_3,
         queueCreateInfoCount    = 1,
         pQueueCreateInfos       = &queue_info,
-        enabledLayerCount       = u32(len(validation_layers)),
-        ppEnabledLayerNames     = raw_data(validation_layers),
+        enabledLayerCount       = 0,//u32(len(validation_layers)),
+        ppEnabledLayerNames     = nil,//raw_data(validation_layers),
         enabledExtensionCount   = u32(len(device_extensions)),
         ppEnabledExtensionNames = raw_data(device_extensions),
     }
@@ -866,8 +866,9 @@ init_frame_resources :: proc(frame: ^frame_t, layout: ^vk.DescriptorSetLayout) {
 
 /* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ */
 create_shader_module :: proc(path: string) -> (shader: vk.ShaderModule) {
-    data, result := os.read_entire_file(path)
-    __ensure(result, "Failed to open file")
+    data, success := os.read_entire_file_from_path(path, context.allocator)
+    //data, result := os.read_entire_file(path)
+    //__ensure(result, "Failed to open file")
     shader_module_info := vk.ShaderModuleCreateInfo {
         sType    = .SHADER_MODULE_CREATE_INFO,
         codeSize = len(data),
