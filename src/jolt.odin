@@ -1,6 +1,6 @@
 package ism
 
-import sigil "sigil:core"
+import sigil "lib:sigil"
 import "lib:jolt"
 import "core:math"
 import "core:math/rand"

@@ -1,6 +1,6 @@
 package ism
 
-import sigil "../core"
+import sigil "lib:sigil"
 import glm "core:math/linalg/glsl"
 import "core:math/linalg"
 import "core:math"

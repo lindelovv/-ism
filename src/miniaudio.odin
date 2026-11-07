@@ -1,6 +1,6 @@
 package ism
 
-import sigil "sigil:core"
+import sigil "lib:sigil"
 import ma "vendor:miniaudio"
 import "vendor:glfw"
 import "core:math"

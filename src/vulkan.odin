@@ -1,6 +1,6 @@
 package ism
 
-import sigil "sigil:core"
+import sigil "lib:sigil"
 import "core:dynlib"
 import "core:slice"
 import "core:strings"

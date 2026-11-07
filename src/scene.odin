@@ -1,6 +1,6 @@
 package ism
 
-import sigil "sigil:core"
+import sigil "lib:sigil"
 import "vendor:glfw"
 import glm "core:math/linalg/glsl"
 import "core:fmt"

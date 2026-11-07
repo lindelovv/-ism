@@ -6,7 +6,7 @@ package ism
 //import "vendor:wgpu"
 //import "core:sys/wasm/js"
 //import "core:fmt"
-//import sigil "sigil:core"
+//import sigil "lib:sigil"
 //
 //wgpu := sigil.module_create_info_t {
 //    name     = "webgpu_module",

@@ -1,7 +1,7 @@
 #+build !js
 package ism
 
-import sigil "sigil:core"
+import sigil "lib:sigil"
 import "core:fmt"
 import "lib:imgui"
 import imgui_vk "lib:imgui/imgui_impl_vulkan"

@@ -1,5 +1,6 @@
 package ism
 
+import sigil "lib:sigil"
 import vk "vendor:vulkan"
 import vma "lib:odin-vma"
 import glm "core:math/linalg/glsl"
@@ -7,7 +8,6 @@ import "lib:slang"
 import "core:slice"
 import "core:fmt"
 import "core:os"
-import sigil "sigil:core"
 
 /* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ */
 

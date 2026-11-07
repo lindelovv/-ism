@@ -1,5 +1,5 @@
 package ism
-import sigil "sigil:core"
+import sigil "lib:sigil"
 
 init :: distinct #type proc(^sigil.world_t)
 tick :: distinct #type proc(^sigil.world_t)

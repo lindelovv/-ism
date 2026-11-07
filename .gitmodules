@@ -13,6 +13,6 @@
 [submodule "lib/slang"]
 	path = lib/slang
 	url = https://github.com/DragosPopse/odin-slang
-[submodule "lib/-ism"]
-	path = lib/-ism
-	url = git@github.com:lindelovv/-ism
+[submodule "lib/sigil"]
+	path = lib/sigil
+	url = https://github.com/lindelovv/sigil
