@@ -10,6 +10,12 @@
 [submodule "lib/slang"]
 	path = lib/slang
 	url = https://github.com/DragosPopse/odin-slang
+[submodule "lib/mikktspace"]
+	path = lib/mikktspace
+	url = https://github.com/wrapperup/odin-mikktspace
 [submodule "lib/sigil"]
 	path = lib/sigil
 	url = https://github.com/lindelovv/sigil
+[submodule "lib/odin-imgui"]
+	path = lib/odin-imgui
+	url = https://gitlab.com/L-4/odin-imgui
